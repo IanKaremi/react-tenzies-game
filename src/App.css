@@ -36,3 +36,14 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+.rollBtn{
+  height: 50px;
+  width: 100px;
+  border: none;
+  border-radius: 6px;
+  background-color: #5035FF;
+  color: white;
+  font-family: Inter, sans-serif; 
+  font-size: 1.25rem;
+}
