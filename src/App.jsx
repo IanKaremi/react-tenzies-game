@@ -1,13 +1,26 @@
 import {useState } from 'react'
 import './App.css'
 import Die from './die'
+import Confetti from 'react-confetti'
 
 function App() {
 
  
 
-  const [dice, setDice] = useState(getDiceNumbers())
-  
+  const [dice, setDice] = useState(()=> getDiceNumbers())
+//done to prevent react from re-rendering the component every time the state changes
+  function checkWin() {
+     const allHeld = dice.every(die => die.isHeld)
+     const firstValue = dice[0].value
+     const allSameValue = dice.every(die => die.value === firstValue)
+     if (allHeld && allSameValue) {
+       console.log("You win!")
+       return true
+     } else {
+       return false
+     }
+  }
+  var won = checkWin()
   
   function getDiceNumbers() {
     var diceArray = []
@@ -24,7 +37,7 @@ function App() {
     return diceArray
   }
 
-  
+
 
   function holdDie(key){
     setDice(prevDice => {
@@ -41,11 +54,16 @@ function App() {
   };
 
   function rollDice() {
+    if(!won){
     setDice(prevDice => prevDice.map(die=>
       die.isHeld ? die :  {...die, value: Math.floor(Math.random() * 6) + 1}
         //if the die is held, return it as is
       
     ))
+  }else{
+    setDice(getDiceNumbers())
+    //if the game is won, reset the game
+  }
     
   }
 
@@ -64,12 +82,16 @@ function App() {
   return (
     <>
      <main className='mainEl'>
+      {won && <Confetti/>}
+      <div aria-live="polite" className="sr-only">
+                {won && <p>Congratulations! You won! Press "New Game" to start again.</p>}
+      </div>
         <h1 className='title'>Tenzies</h1>
         <p className='instructions'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className='diceGrid'>
         {dieElements}
         </div>
-        <button className='rollBtn' onClick={rollDice}>Roll</button>
+        <button className='rollBtn' onClick={rollDice}>{won ? "New Game" : "Roll"}</button>
 
 
      </main>

@@ -39,7 +39,7 @@ body {
 
 .rollBtn{
   height: 50px;
-  width: 100px;
+  width: auto;
   border: none;
   border-radius: 6px;
   background-color: #5035FF;
