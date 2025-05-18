@@ -14,8 +14,9 @@ function App() {
     diceArray.length = 10
     for (let i = 0; i < 10; i++) {
       //generate a random number between 1 and 6
-      //and push it to the diceArray
-      diceArray.push(Math.floor(Math.random() * 6) + 1)
+      //and push it to each object then to the diceArray
+      var obj = {isHeld: false, value: Math.floor(Math.random() * 6) + 1}
+      diceArray.push(obj)
     } 
     console.log("diceArray: " + diceArray)
     return diceArray
@@ -24,7 +25,7 @@ function App() {
   //map through the diceArray and create a die element for each number
   var dieElements = dice.map((die, index) => {
     return (
-      <Die key={index} value={die}/>
+      <Die key={index} value={die.value} held={die.isHeld}/>
     )
   }
   )
