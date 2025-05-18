@@ -1,0 +1,47 @@
+import {useState} from 'react'
+import './App.css'
+import Die from './die'
+
+function App() {
+
+ 
+
+  const [dice, setDice] = useState(getDiceNumbers())
+  
+  
+  function getDiceNumbers() {
+    var diceArray = []
+    diceArray.length = 10
+    for (let i = 0; i < 10; i++) {
+      //generate a random number between 1 and 6
+      //and push it to the diceArray
+      diceArray.push(Math.floor(Math.random() * 6) + 1)
+    } 
+    console.log("diceArray: " + diceArray)
+    return diceArray
+  }
+
+  //map through the diceArray and create a die element for each number
+  var dieElements = dice.map((die, index) => {
+    return (
+      <Die key={index} value={die}/>
+    )
+  }
+  )
+
+  console.log(dice)
+  return (
+    <>
+     <main className='mainEl'>
+        <div className='diceGrid'>
+        {dieElements}
+        </div>
+        <button className='rollBtn' onClick={() => setDice(getDiceNumbers())}>Roll</button>
+
+
+     </main>
+    </>
+  )
+}
+
+export default App

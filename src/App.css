@@ -1,0 +1,38 @@
+#root {
+ height: 100%;
+ width: 100%;
+ max-width: 400px;
+ max-height: 400px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  min-width: 320px;
+  height: 100vh;
+}
+
+
+.diceGrid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.diceGrid>button{
+
+  height: 50px;
+  width: 50px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  font-family:Inter, sans-serif; ;
+  font-size: 1.75rem;
+  font-weight: bold;
+  cursor: pointer;
+}
